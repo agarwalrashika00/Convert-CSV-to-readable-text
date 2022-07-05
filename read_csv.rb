@@ -1,5 +1,6 @@
+require 'csv'
+
 class ModifyCSV
-    require 'csv'
     def convert_csv_to_hash (csvfile, key_index)
         hash = Hash.new {|h,k| h[k]=[]}
         CSV.foreach(csvfile, headers:true) do |row|
