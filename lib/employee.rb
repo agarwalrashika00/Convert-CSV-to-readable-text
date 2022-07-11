@@ -11,11 +11,15 @@ class Employee
     @designation = designation
   end
 
-  def self.sort_by_designation
-    employee_list.sort_by!(&:designation)
+  def <=>(other)
+    designation <=> other.designation
   end
 
   def self.group_by_designation
     employee_list.group_by(&:designation)
+  end
+
+  def to_s
+    "#{name} (EmpId: #{empid})"
   end
 end

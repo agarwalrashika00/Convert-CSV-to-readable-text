@@ -1,9 +1,10 @@
 require 'csv'
-require './employee.rb'
-require './read_and_write.rb'
+require_relative './employee.rb'
+require_relative './file_operations.rb'
 
-ReadAndWrite.read_csv('../bin/csv_file.csv')
-Employee.sort_by_designation
-employee_hash = Employee.group_by_designation
-
-ReadAndWrite.write_to_file('../bin/output2.txt', employee_hash)
+begin
+    employee_hash = FileOperations.read_csv('E:\Desktop\Vinsol\ruby exercises\CSV2\bin\csv_file.csv')
+    FileOperations.write_to_file('E:\Desktop\Vinsol\ruby exercises\CSV2\bin\output2.txt', employee_hash)
+rescue Errno::ENOENT
+    puts "file not found"
+end
