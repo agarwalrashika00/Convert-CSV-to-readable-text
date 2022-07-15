@@ -1,5 +1,5 @@
 class MissingFileError < StandardError
-    def initialize(msg = 'file not found')
-        super
-    end
+  def initialize(msg = 'file not found')
+    super
+  end
 end
