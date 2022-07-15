@@ -1,3 +1,5 @@
+require_relative './missing_file_error.rb'
+
 class CSVOperations
   def initialize(csv_file, output_file)
     @employee_hash ={}
@@ -7,14 +9,16 @@ class CSVOperations
 
   def read_csv
     begin
+      raise MissingFileError unless File.exists?(@csv_file)
+
       employee_list = []
       CSV.foreach(@csv_file, headers: true) do |row|
       employee_list << Employee.new(row[0].strip, row[1].strip, row[2].strip)
       end
       employee_list.sort!
       @employee_hash = Employee.group_by_designation(employee_list)
-    rescue Errno::ENOENT
-      puts 'file not found'
+    rescue MissingFileError => e
+      puts e
     end
   end
 
